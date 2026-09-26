@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Penilaian - Data Siswa</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <header class="app-header">
+            <h1>Data Siswa</h1>
+            <div class="header-actions">
+                <button id="btnDarkMode" class="btn btn-secondary" type="button" title="Ganti tema">🌙 Mode Gelap</button>
+                <button id="btnTambah" class="btn btn-primary">+ Tambah Siswa</button>
+            </div>
+        </header>
+
+        <div id="messageBox" class="message-box hidden"></div>
+
+        <div class="toolbar card">
+            <div class="toolbar-field">
+                <label for="searchInput">Cari Siswa</label>
+                <input type="text" id="searchInput" placeholder="Cari nama atau NIS...">
+            </div>
+            <div class="toolbar-field">
+                <label for="filterKelas">Filter Kelas</label>
+                <select id="filterKelas">
+                    <option value="">Semua Kelas</option>
+                </select>
+            </div>
+            <div class="toolbar-field toolbar-field-small">
+                <label for="limitSelect">Baris / Halaman</label>
+                <select id="limitSelect">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card">
+            <div id="loadingIndicator" class="loading hidden">
+                <div class="spinner"></div>
+                <span>Memuat data...</span>
+            </div>
+
+            <div class="table-scroll">
+                <table id="siswaTable" class="siswa-table">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>NIS</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Jurusan</th>
+                            <th>Alamat</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="siswaTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <p id="emptyState" class="empty-state hidden">Belum ada data siswa.</p>
+
+            <div id="paginationBar" class="pagination-bar hidden">
+                <span id="paginationInfo"></span>
+                <div class="pagination-controls">
+                    <button type="button" id="btnPrevPage" class="btn btn-secondary btn-small">&laquo; Sebelumnya</button>
+                    <span id="pageIndicator"></span>
+                    <button type="button" id="btnNextPage" class="btn btn-secondary btn-small">Selanjutnya &raquo;</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="formModal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2 id="formTitle">Tambah Siswa</h2>
+            <form id="siswaForm" novalidate>
+                <input type="hidden" id="siswaId">
+                <input type="hidden" id="hapusFotoFlag" value="false">
+
+                <label for="nis">NIS</label>
+                <input type="text" id="nis" name="nis" inputmode="numeric" maxlength="20" required>
+                <span class="field-error" data-error-for="nis"></span>
+
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama" maxlength="100" required>
+                <span class="field-error" data-error-for="nama"></span>
+
+                <label for="kelas">Kelas</label>
+                <input type="text" id="kelas" name="kelas" maxlength="20" required>
+                <span class="field-error" data-error-for="kelas"></span>
+
+                <label for="jurusan">Jurusan</label>
+                <input type="text" id="jurusan" name="jurusan" maxlength="50" required>
+                <span class="field-error" data-error-for="jurusan"></span>
+
+                <label for="alamat">Alamat</label>
+                <textarea id="alamat" name="alamat" rows="2" maxlength="255" required></textarea>
+                <span class="field-error" data-error-for="alamat"></span>
+
+                <label for="foto">Foto Siswa</label>
+                <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/webp">
+                <span class="field-hint">Format JPG/PNG/WEBP, maksimal 2MB.</span>
+                <span class="field-error" data-error-for="foto"></span>
+
+                <div id="fotoPreviewWrap" class="foto-preview-wrap hidden">
+                    <img id="fotoPreview" class="foto-preview" alt="Preview foto siswa">
+                    <button type="button" id="btnHapusFoto" class="btn btn-secondary btn-small">Hapus Foto</button>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="btnBatal" class="btn btn-secondary">Batal</button>
+                    <button type="submit" id="btnSimpan" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="modal-overlay hidden">
+        <div class="modal modal-small">
+            <h2>Hapus Siswa?</h2>
+            <p id="confirmText">Data ini akan dihapus permanen. Yakin ingin melanjutkan?</p>
+            <div class="modal-actions">
+                <button type="button" id="btnBatalHapus" class="btn btn-secondary">Batal</button>
+                <button type="button" id="btnKonfirmHapus" class="btn btn-danger">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
