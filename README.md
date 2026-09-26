@@ -49,4 +49,4 @@ PUT/PATCH — memperbarui data
 
 DELETE — menghapus data
 
-Dokumentasi nya ada di folder screenshoot
+Dokumentasi nya ada di folder Dokumentasi
