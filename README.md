@@ -855,9 +855,9 @@ Gunakan dan modifikasi sesuai kebutuhan.
 │  > CONNECTION ESTABLISHED                          │
 │  > DATABASE CONNECTED                              │
 │  > API READY                                       │
-│  > SYSTEM STATUS: OPERATIONAL                     │
+│  > SYSTEM STATUS: OPERATIONAL                      │
 │                                                    │
-│  [EOF]                                              │
+│  [EOF]                                             │
 └────────────────────────────────────────────────────┘
 ```
 
